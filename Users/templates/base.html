@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+{% block title %}
+
+{% endblock %}
+
+<style>
+    label, input {
+        display: block;
+    }
+    span.helptext {
+        display: none;
+    }
+    body {
+        background-image: url("Poiesis/media/poem.jpg");
+    }
+
+    h1 {
+      margin-top: 10px;
+      margin-left: 10px;
+      font-size: 35px;
+      font-weight: normal;
+      font-color: #002db3;
+      text-transform: uppercase;
+      line-height: 45px;
+      text-align: left;
+    }
+
+    h2 {
+      margin-top: 10px;
+      margin-left: 40px;
+      font-size: 25px;
+      font-weight: normal;
+      font-color: #002db3;
+     }
+
+    p {
+    display: block;
+    font-size: 25px;
+    font-weight: normal;
+    font-color:#002db3;
+    margin-left: 10px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 10px;
+    margin-inline-end: 0px;
+    }
+    form {
+
+    }
+
+    .pre {
+        background-color: fdfcf8;
+        width: 1000px;
+        padding: 40px 25px;
+    }
+
+    .media {
+        align-items: center;
+        display: flex;
+        text-align: inherit;
+        justify-content: space-around;
+        align-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+
+    .card-content {
+        background-color: transparent;
+        padding: 2 rem;
+
+    .box {
+        background-color: #fdfcf8;
+        border-radius: 6px;
+        box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+        color: #4a4a4a;
+        display: block;
+        padding: 1.75rem;
+    }
+
+</style>
+
+</head>
+
+<body>
+ <section class="hero is-small is-link mb-4">
+     <div class="hero-body">
+            <h1 class="title is-1"> Poiesis</h1>
+            <p class="subtitle is-4">
+                Spreading awareness of something that did not exist before
+            </p>
+<nav class="navbar" role="navigation" aria-label="main navigation" >
+  <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu is-active">
+    <div class="navbar-start">
+      <a class="navbar-item" href ="{% url 'Users:dashboard' %}">
+        Poiesis
+      </a>
+     <div class="navbar-item">
+        <a class="navbar-item" href="{% url 'Users:read_poems' %}"> Read poems</a>
+    </div>
+    <div class="navbar-item">
+      <a class="navbar-item" href="{% url 'Users:add_poems' %}"> Add poems </a>
+    </div>
+    <div class="navbar-item">
+        <a class="navbar-item" href="{% url 'Users:profile_list' %}"> Find poets</a>
+    </div>
+<!--    <div class="navbar-item">-->
+<!--        <a class="navbar-item" href="{% url 'Users:profile_list' %}"> Write poetry</a>-->
+<!--    </div>    -->
+    </div>
+    {% if user.is_authenticated %}
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-link" href="{% url 'Users:my_account' %}">
+            <strong>My account</strong>
+          </a>
+          <a class="button is-light" href="{% url 'Users:logout' %}">
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+      {% else %}
+      <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-link" href="{% url 'Users:register' %}">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light" href="{% url 'Users:login' %}">
+            Login
+          </a>
+        </div>
+         {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+          </div>
+    </section>
+</body>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+{% block content %}
+
+{% endblock content %}
+
+
+</html>

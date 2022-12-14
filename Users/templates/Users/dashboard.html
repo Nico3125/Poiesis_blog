@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+
+<title>Poiesis</title>
+{%  endblock title %}
+
+
+{% block content %}
+
+<body>
+<div class="column">
+    <h1>Hello, {{ user.username|default:'Guest' }}! </h1>
+    <p>Publish your poetry online!<br>
+        Improve your poetry, create a fan base, and read the best poetry of our generation!<br>
+        Poiesis is home base for all poets, from beginners to advanced.
+    </p>
+
+
+    <!--<div class="grd-row-col-2-6" style="height: auto !important;">-->
+    <!--<div class="side_bar rcol" style="height: auto !important;">-->
+
+
+    <div class="container">
+
+        {% for poem in user.poem.all %}
+        <div class="media">
+            {{ poem.title }}
+            <hr>
+            <pre class="pre"> {{ poem.body}} </pre>
+            <span class="is-small has-text-grey-light">
+                ({{ poem.created_at }} by {{ poem.user.username }}
+            </span>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <footer>
+        {% if user.is_authenticated %}
+         <div class="column">
+        {% for followed in user.profile.follows.all %}
+        {% for poem in followed.user.poems.all %}
+        <div class="box">
+            {{ poem.title }}
+            <hr>
+            <pre class="pre"> {{ poem.body}} </pre>
+            <span class="is-small has-text-grey-light">
+                    ({{ poem.created_at }} by {{ poem.user.username }}
+                </span>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+        <a href="{% url 'Users:logout' %}">Logout</a><br>
+        <a href="{% url 'Users:password_change' %}">Change password</a>
+        {% else %}
+        <div class="column">
+            <p> Log in to stay connected with our contemporary poets! </p>
+            <a class="button is-link" href="{% url 'Users:login' %}">
+                <strong>Login</strong>
+            </a>
+
+        </div>
+        {% endif %}
+    </footer>
+</div>
+
+</body>
+
+{% endblock content %}

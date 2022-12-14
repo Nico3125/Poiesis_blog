@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+{%  endblock title %}
+
+{% block content %}
+<body>
+    {% if user.is_authenticated %}
+  <div class="block">
+        <h2 class="title is-2">Update Poem</h2>
+    </div>
+  <h1>{{ poem_id.poems.title }} Edit</h1>
+  <pre>{{ poem_id.poems.body }} Edit</pre>
+  <div class="column is-one-third">
+  <form action="" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+      <a class="button is-link is-fullwidth is-medium mt-5" href="{% url 'Users:my_account' %}"
+                    type="submit">Update </a>
+  </form>
+ </div>
+
+ {% else %}
+<h1> To visit this page please <a href="{% url 'Users:login' %}">Login</a>or <a href="{% url 'Users:register' %}">Sign up</a></h1>
+{% endif %}
+</body>
+{% endblock  %}

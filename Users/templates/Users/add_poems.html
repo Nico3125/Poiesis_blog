@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+{%  endblock title %}
+
+{% block content %}
+<body>
+<div class="column">
+    <h1>Hello, {{ user.username|default:'Guest' }}! </h1>
+
+    {% if user.is_authenticated %}
+    <div class="block">
+        <h2 class="title is-2">Add a Poem</h2>
+    </div>
+    <div class="column is-one-third">
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="button is-link is-fullwidth is-medium mt-5"
+
+                    type="submit">Add
+
+            </button>
+
+        </form>
+    </div>
+    </div>
+
+ {% else %}
+<h1> To visit this page please <a href="{% url 'Users:login' %}">Login</a>or <a href="{% url 'Users:register' %}">Sign up</a></h1>
+{% endif %}
+</body>
+{% endblock  %}

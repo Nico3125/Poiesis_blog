@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="block">
+        {% for poem in poems.all %}
+
+                {{ poem.title }}
+                <hr>
+                <pre class="pre"> {{ poem.body}} </pre>
+                <span class="is-small has-text-grey-light">
+                    ({{ poem.created_at }} by {{ poem.user.username }}</br>
+            </span>
+              {% endfor %}
+</div>
+{% endblock content %}
+

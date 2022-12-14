@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Logout {% endblock %}
+
+{% block content %}
+<header class="header">
+    <h2> You are successfully logged out!</h2>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        <a class="ml-2" href="{% url 'Users:login' %}">Login!</a>
+    </small>
+</div>
+
+    <a href="{% url 'Users:dashboard' %}" class="logo">Poiesis</a>
+    <nav class="nav-items">
+        <a href="{% url 'Users:dashboard' %}">Home</a>
+        <a href="{% url 'Users:login' %}">Login</a>
+        <a href="{% url 'Users:logout' %}">Logout</a>
+    </nav>
+
+</header>
+{% endblock content %}

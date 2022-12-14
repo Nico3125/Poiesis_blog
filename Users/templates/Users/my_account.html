@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <div class="column">
+        <h1>Hello, {{ user.username|default:'Guest' }}! </h1>
+        <div class="card-content">
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <img src="{{ profile.image.url }}"
+                         alt="Profile image">
+                </figure>
+            </div>
+            <div class="media-content">
+                <p class="title is-4">
+                    {{ profile.user.username }}
+                </p>
+                <p class="subtitle is-6">
+                    {{ profile.user.bio|lower }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="media">
+
+    {% for poem in user.poems.all %}
+     <div class="box">
+
+      <h3>  {{ poem.title }} </h3>
+        <hr>
+        <pre class="pre"> {{ poem.body}} </pre>
+         <a href="{% url 'Users:edit_poems' poem.pk %}">Edit</a>
+        <span class="is-small has-text-grey-light">
+                ({{ poem.created_at }} by {{ poem.user.username }}
+            </span></div>
+
+    {% endfor %}
+    </div>
+       <a class="button is dark" href="{% url 'Users:password_change' %}">Change password</a>
+    </div>
+</body>
+{% endblock content %}
